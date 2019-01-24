@@ -1,0 +1,37 @@
+<?php
+
+//配置文件
+return [
+    'server' => [
+        'host' => '0.0.0.0',
+        'port' => 9501,
+        'setting' => [
+            'work_num' => 1,
+        ],
+    ],
+    'mysql' => [
+        // 'database_type' => 'mysql',
+        'server' => 'mysql-db',
+        'port' => 3306,
+        'username' => 'root',
+        'timeout' => 5,
+        'charset' => 'utf8',
+        'password' => '123456',
+        'database_name' => 'onesql',
+        // 'pool_max_num'=>20,
+        // 'pool_expire_time'=>200,
+        // 'pool_check_time'=>6000,
+        // 'connect_time_out' => 0.5,
+    ],
+    'mssql' => [
+        'database_name' => 'UFDATA_101_2017',
+        'server' => '192.168.1.148',
+        'username' => 'sa',
+        'password' => 'sql2008',
+    ],
+    'redis' => [
+        'host' => 'redis-db',
+        'port' => 6379,
+        'auth' => '',
+    ],
+];

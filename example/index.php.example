@@ -1,0 +1,12 @@
+<?php
+
+
+define('ROOT_PATH', realpath(getcwd()));
+$file = ROOT_PATH.'/vendor/autoload.php';
+if (file_exists($file)) {
+    require_once $file;
+} else {
+    die("include composer autoload.php fail\n");
+}
+
+\Ss\Main::run();

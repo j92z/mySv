@@ -1,0 +1,21 @@
+{
+    "name": "j92z/simpleserver",
+    "authors": [
+        {
+            "name": "j92z",
+            "email": "zeco11320@163.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "ext-swoole": ">=4.2.9",
+        "smarty/smarty": "~3.1",
+        "catfan/medoo": "^1.6.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Ss\\": "src/"
+        }
+    }
+}
