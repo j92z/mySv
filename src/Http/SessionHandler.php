@@ -14,7 +14,7 @@ class SessionHandler implements \SessionHandlerInterface
     const FILE = 1;
     const REDIS = 0;
     private $mode = self::REDIS;
-    private $sessionExpire = 1800;
+    private $sessionExpire = 86400;
 
     public function __construct($mode = self::REDIS)
     {
