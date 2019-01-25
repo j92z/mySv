@@ -64,7 +64,7 @@ abstract class Controller
             $json_param = Func::json($this->request->raw(), true);
             $key = substr($key, 5, -1);
             if (!is_string($key) && !$key) {
-                return null;
+                return $json_param;
             }
 
             return Func::getInfoByKey($json_param, $key);
