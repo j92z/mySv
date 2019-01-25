@@ -232,4 +232,10 @@ abstract class Controller
             return $this->session->get($key);
         }
     }
+
+    public function redirect(string $url)
+    {
+        $this->response->header('Location', $url);
+        $this->response->status(302);
+    }
 }
