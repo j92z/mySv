@@ -6,6 +6,7 @@ use Ss\Core\Config;
 use Ss\Http\Request;
 use Ss\Http\Response;
 use Ss\Http\Session;
+use Ss\Common\Func;
 
 // use duncan3dc\Laravel\BladeInstance;
 
@@ -55,6 +56,21 @@ abstract class Controller
     public function request()
     {
         return $this->request;
+    }
+
+    public function input(string $key)
+    {
+        if (\substr($key, 0, 4) == 'json') {
+            $json_param = Func::json($this->request->raw(), true);
+            $key = substr($key, 5, -1);
+            if (!is_string($key) && !$key) {
+                return null;
+            }
+
+            return Func::getInfoByKey($json_param, $key);
+        } else {
+            return $this->request->getRequestInfo($key);
+        }
     }
 
     public function response()

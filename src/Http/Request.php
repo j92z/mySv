@@ -2,6 +2,8 @@
 
 namespace Ss\Http;
 
+use Ss\Common\Func;
+
 class Request
 {
     private $request;
@@ -27,11 +29,41 @@ class Request
         return $this->request;
     }
 
+    /**
+     * perhaps has value:
+     * -header
+     * -server
+     * -request
+     * -cookie
+     * -get
+     * -files
+     * -post
+     * -tmpfiles.
+     *
+     * @param string $key
+     *
+     * @return mixed
+     */
+    public function getRequestInfo(string $key)
+    {
+        if (!is_string($key) && !$key) {
+            return null;
+        }
+
+        return Func::getInfoByKey($this->request, $key);
+    }
+
+    public function raw()
+    {
+        return $this->request->rawContent();
+    }
+
     public function cookie(string $key = '')
     {
         if (empty($key)) {
             return $this->request->cookie;
         }
+
         return $this->request->cookie[$key] ?? null;
     }
 }
