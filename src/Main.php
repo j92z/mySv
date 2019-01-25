@@ -27,6 +27,7 @@ class Main
                 $response_obj = new Response($response);
                 $route = new Route(Config::get('namespace', 'App'), Config::get('controller', 'Controller'));
                 $route->dispatch($resquest_obj, $response_obj);
+                $response_obj->__res();
             } catch (\Exception $error) {
                 Log::alert($error->getMessage(), $error->getTrace());
                 $response->end($error->getMessage());
@@ -38,7 +39,6 @@ class Main
                 $response->status(500);
             } finally {
             }
-            $response_obj->__res();
         });
         $http->start();
     }

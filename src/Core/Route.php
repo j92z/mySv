@@ -26,8 +26,12 @@ class Route
         $a = isset($path_map[1]) && !empty($path_map[1]) ? $path_map[1] : 'index';
         $class = $this->namespace.'\\'.$this->controller.'\\'.ucfirst($c);
 
-        $controller = new $class();
+        try {
+            $controller = new $class();
 
-        $controller->touch($request, $response, $a);
+            $controller->touch($request, $response, $a);
+        } catch (\Exception $e) {
+            throw new \Exception('route fectch error');
+        }
     }
 }
