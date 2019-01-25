@@ -164,7 +164,6 @@ class Session
             return $sid;
         } else {
             $sid = md5(microtime(true).$this->request->request()->fd);
-            var_dump($this->sessionName, $sid);
             $this->response->cookie($this->sessionName, $sid);
 
             return $sid;
