@@ -145,7 +145,7 @@ abstract class Controller
         Model::recyceDbResource();
         Cache::recycleCacheSource();
         if ($this->session instanceof Session) {
-            $this->session->close();
+            $this->session->writeClose();
         }
     }
 
