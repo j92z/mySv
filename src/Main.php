@@ -10,13 +10,15 @@ use Ss\Http\Response;
 
 class Main
 {
-    final public static function run()
+    final public static function run($param)
     {
         define('DS', DIRECTORY_SEPARATOR);
 
         Config::load(ROOT_PATH.DS.'config.php');
         Log::init(ROOT_PATH.DS.'log');
-
+        if (in_array('d', $param)) {
+            Config::set('server.setting.daemonize', true);
+        }
         \date_default_timezone_set(Config::get('time_zone', 'Asia/Shanghai'));
 
         $http = new \Swoole\Http\Server(Config::get('server.host', '0.0.0.0'), Config::get('server.port', 9501));

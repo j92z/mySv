@@ -29,7 +29,7 @@ class Config
     public static function set(string $key, $value)
     {
         $keys = explode('.', $key);
-        $data = self::$config_map;
+        $data = &self::$config_map;
         while ($k = array_shift($keys)) {
             $data = &$data[$k];
         }
