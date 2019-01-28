@@ -226,7 +226,7 @@ abstract class Controller
         if (is_null($key)) {
             return $this->session->destroy();
         }
-        if ($value != '') {
+        if ($value != '' || is_null($value)) {
             return $this->session->set($key, $value);
         } else {
             return $this->session->get($key);
