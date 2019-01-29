@@ -201,7 +201,7 @@ abstract class Controller
             return $all_cookie;
         } else {
             if (is_null($value)) {
-                $this->response->cookie($key, $value, time() - 3600);
+                $this->response->cookie($key, '', time() - 3600);
                 unset($this->cookie[$key]);
 
                 return true;
