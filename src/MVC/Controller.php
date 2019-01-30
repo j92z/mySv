@@ -93,13 +93,13 @@ abstract class Controller
 
     public function json($content = [])
     {
-        $this->response->header('Content-Type', 'application/json');
+        $this->header('Content-Type', 'application/json');
         $this->response->write(json_encode($content));
     }
 
     public function write($content = '')
     {
-        $this->response->header('Content-Type', 'text/html');
+        $this->header('Content-Type', 'text/html');
         $this->response->write($content);
     }
 
@@ -235,7 +235,19 @@ abstract class Controller
 
     public function redirect(string $url)
     {
-        $this->response->header('Location', $url);
+        $this->header('Location', $url);
         $this->response->status(302);
+    }
+
+    protected function crossAccess()
+    {
+        $area = $this->request->getRequestInfo('header.origin') ?: '*';
+        $this->header('Access-Control-Allow-Origin', $area);
+        $this->header('Access-Control-Allow-Credentials', 'true');
+    }
+
+    protected function header(string $key, string $value)
+    {
+        $this->response->header($key, $value);
     }
 }
