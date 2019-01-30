@@ -26,8 +26,10 @@ abstract class Controller
     private $cache;
     private $session;
 
-    public function __construct()
+    public function __construct(Request $request, Response $response)
     {
+        $this->request = $request;
+        $this->response = $response;
         $this->view = new \Smarty();
         $tempPath = ROOT_PATH.DS.'temp';    // 临时文件目录
         $this->view->setCompileDir("{$tempPath}/templates_c/");      // 模板编译目录
@@ -37,6 +39,9 @@ abstract class Controller
         // $this->view = new BladeInstance(ROOT_PATH.DS.Config::get('namespace', 'App').DS.'/Views/', "{$tempPath}/templates_c");
         $this->model = new Model();
         $this->cache = new Cache();
+        if (method_exists($this, 'init')) {
+            $this->init();
+        }
     }
 
     // public function render(string $view, array $params = [])

@@ -27,9 +27,9 @@ class Route
         $class = $this->namespace.'\\'.$this->controller.'\\'.ucfirst($c);
 
         try {
-            $controller = new $class();
+            $controller = new $class($request, $response);
 
-            $controller->touch($request, $response, $a);
+            $controller->$a();
         } catch (\Exception $e) {
             throw new \Exception('route fectch error');
         }
