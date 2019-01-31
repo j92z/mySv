@@ -21,6 +21,15 @@ class Route
         if ($request->request()->server['path_info'] == '/favicon.ico') {
             return;
         }
+        //配置跨域选项
+        if ($request->request()->server['request_method'] == 'OPTIONS') {
+            $area = $request->getRequestInfo('header.origin') ?: '*';
+            $response->header('Access-Control-Allow-Origin', $area);
+            $response->header('Access-Control-Allow-Credentials', 'true');
+            $response->header('Access-Control-Allow-Headers', 'X-Requested-With');
+
+            return;
+        }
         $path_map = explode('/', trim($request->request()->server['path_info'], '/'));
         $c = isset($path_map[0]) && !empty($path_map[0]) && $path_map[0] != '/' ? $path_map[0] : 'index';
         $a = isset($path_map[1]) && !empty($path_map[1]) ? $path_map[1] : 'index';

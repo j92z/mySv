@@ -249,6 +249,7 @@ abstract class Controller
         $area = $this->request->getRequestInfo('header.origin') ?: '*';
         $this->header('Access-Control-Allow-Origin', $area);
         $this->header('Access-Control-Allow-Credentials', 'true');
+        $this->header('Access-Control-Allow-Headers', 'X-Requested-With');
     }
 
     protected function header(string $key, string $value)
