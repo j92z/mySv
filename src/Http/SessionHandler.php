@@ -97,7 +97,11 @@ class SessionHandler implements \SessionHandlerInterface
             return (bool) $this->fp->write($session_data);
         } else {
             if (empty(\unserialize($session_data))) {
-                return (bool) $this->fp->del("{$this->savePath}:{$session_id}");
+                if ($this->fp->exists("{$this->savePath}:{$session_id}")) {
+                    return (bool) $this->fp->del("{$this->savePath}:{$session_id}");
+                } else {
+                    return true;
+                }
             } else {
                 return (bool) $this->fp->setex("{$this->savePath}:{$session_id}", $this->sessionExpire, $session_data);
             }
