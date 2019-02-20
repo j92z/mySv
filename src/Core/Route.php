@@ -42,16 +42,19 @@ class Route
                 }
             }
         }
-        $c = isset($path_map[0]) && !empty($path_map[0]) && $path_map[0] != '/' ? $path_map[0] : 'index';
-        $a = isset($path_map[1]) && !empty($path_map[1]) ? $path_map[1] : 'index';
+        $c = isset($path_map[$path_length - 2]) && !empty($path_map[$path_length - 2]) && $path_map[$path_length - 2] != '/' ? $path_map[$path_length - 2] : 'index';
+        $a = isset($path_map[$path_length - 1]) && !empty($path_map[$path_length - 1]) ? $path_map[$path_length - 1] : 'index';
         $class = $this->namespace.'\\'.$this->controller.'\\'.ucfirst($c);
 
-        try {
-            $controller = new $class($request, $response);
-
-            $controller->$a();
-        } catch (\Exception $e) {
-            throw new \Exception('route fectch error');
+        $controller = new $class($request, $response);
+        if ($controller instanceof Controller) {
+            if (method_exists($controller, $a)) {
+                $controller->$a();
+            } else {
+                throw new \Exception('Method Not Found!');
+            }
+        } else {
+            throw new \Exception('Controller Not Found!');
         }
     }
 }
